@@ -1,3 +1,7 @@
+'''
+function:
+1. 生成图案/方形中间为圆/圆value=y边value=x的box
+'''
 import numpy as np
 from skimage import draw, data
 
@@ -11,3 +15,6 @@ def box_circle(box_length, center, radius, x, y):
     box[rr, cc] = y
     # print(box.sum())
     return box
+
+if __name__=='__main__':
+    print("Welcome to MyTools!")
