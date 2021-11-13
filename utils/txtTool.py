@@ -11,7 +11,7 @@ function:
 6. “新建”txt文件写入一个数组/"一个元素一行"
 7. “对原有” txt文件写入一个数组 "一个元素一行"
 8. 两个txt文件 拼接
-9. 
+9. 以列表形式返回txt中的内容/并去掉回车‘\n’/每一行有多个属性
 
 
 模式    可做操作    若文件不存在    是否覆盖
@@ -23,6 +23,25 @@ a       只能写          创建        否，追加写
 a+      可读可写        创建        否，追加写
 '''
 import os
+
+
+'''
+检查文件地址的合法性,不存在文件夹则新建
+'''
+def check_dir(file_path):
+    # 检查路径合法性
+    index = -1
+    for i in file_path[::-1]:
+        if i == '/' or i == '\\':
+            break
+        else:
+            index-=1
+    dirpath = file_path[:index]
+    # print(dirpath)
+    folder = os.path.exists(dirpath)
+    if not folder:
+        os.makedirs(dirpath)
+
 
 '''
 读取
@@ -47,6 +66,15 @@ def txtReadNumArray(file_path, tList=[]):
     tList = [float(i[:-1]) for i in tList]
     return tList
 
+# 以列表形式返回txt中的内容/并去掉回车‘\n’/每一行有多个属性
+def txt_read_2dim(file_path, tList=[]):
+    f = open(file_path)               # 返回一个文件对象   
+    line = f.readline()               # 调用文件的 readline()方法   
+    while line: 
+        tList.append(line[:-1].split())        # 不指定时 默认空格  有多个空格能跳过
+        line = f.readline()   
+    f.close()
+    return tList
 
 '''
 写入
@@ -65,6 +93,9 @@ def txtAddWrite(file_path, str):
 
 # “新建”txt文件写入一个数组 "一个元素一行"
 def txtWriteArray(file_path, tList=[]):
+
+    check_dir(file_path)    # 检查文件夹路径的合法性
+
     tList = [str(i)+"\n" for i in tList]
     with open(file_path,'w') as f:    #设置文件对象
         f.writelines(tList)
@@ -83,10 +114,12 @@ def txtAddtxt(path1, path2):
     txtAddWriteArray(path1, list2)
 
 
+
 if __name__ == '__main__':
     print("Welcome to MyTools!")
     txtPath = "./example/data/test.txt"
     txtPath2 = "./example/data/test2.txt"
+    txtPath3 = "./example/data/2011.txt"
     txtAddWrite(txtPath,"95633")
     # txtWriteArray(txtPath,[1212, 452345, 2135123])
     txtWriteArray(txtPath,[1, 2, 3])
@@ -95,6 +128,9 @@ if __name__ == '__main__':
     print(txtRead(txtPath))
     
     txtAddtxt(txtPath, txtPath2)
+
+    a = txt_read_2dim(txtPath3)
+    print(a)
 
 
 

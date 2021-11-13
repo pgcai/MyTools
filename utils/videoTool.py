@@ -7,6 +7,7 @@ author：pgcai
 function:
 1. 将视频分帧到指定文件夹
 2. 将指定文件夹图片合成为视频
+3. 拼接两个视频
 
 '''
 import cv2
