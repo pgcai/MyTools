@@ -9,9 +9,11 @@ function:
 4. 对txt文件写入指定字符串str
 5. 对txt文件增添写入指定字符串str
 6. “新建”txt文件写入一个数组/"一个元素一行"
-7. “对原有” txt文件写入一个数组 "一个元素一行"
+7. “对原有” txt文件写入一个列表 "一个元素一行"
 8. 两个txt文件 拼接
-9. 以列表形式返回txt中的内容/并去掉回车‘\n’/每一行有多个属性
+9.以列表形式返回txt中的内容(有字符串)/并去掉回车‘\n’/每一行有多个属性
+10. “新建”txt文件写入一个2-dim列表/"多个属性一行"
+11. 以列表形式返回txt中的内容(纯数字，提前转换为浮点型)/并去掉回车‘\n’/每一行有多个属性
 
 
 模式    可做操作    若文件不存在    是否覆盖
@@ -66,12 +68,26 @@ def txtReadNumArray(file_path, tList=[]):
     tList = [float(i[:-1]) for i in tList]
     return tList
 
-# 以列表形式返回txt中的内容/并去掉回车‘\n’/每一行有多个属性
+# 9. 以列表形式返回txt中的内容(有字符串)/并去掉回车‘\n’/每一行有多个属性
 def txt_read_2dim(file_path, tList=[]):
     f = open(file_path)               # 返回一个文件对象   
     line = f.readline()               # 调用文件的 readline()方法   
-    while line: 
+    while line:
         tList.append(line[:-1].split())        # 不指定时 默认空格  有多个空格能跳过
+        line = f.readline()   
+    f.close()
+    return tList
+
+# 11. 以列表形式返回txt中的内容(纯数字，提前转换为浮点型)/并去掉回车‘\n’/每一行有多个属性
+def txt_read_2dim_num(file_path, tList=[]):
+    f = open(file_path)               # 返回一个文件对象   
+    line = f.readline()               # 调用文件的 readline()方法   
+    while line: 
+        alist = line[:-1].split()
+        new = []
+        for i in alist:
+            new.append(float(i))
+        tList.append(new)        # 不指定时 默认空格  有多个空格能跳过
         line = f.readline()   
     f.close()
     return tList
@@ -113,6 +129,20 @@ def txtAddtxt(path1, path2):
     list2 = txtReadArray(path2)
     txtAddWriteArray(path1, list2)
 
+# 10. “新建”txt文件写入一个2-dim列表/"多个属性一行"
+def txt_write_2d_array(file_path, tList=[[]]):
+
+    check_dir(file_path)    # 检查文件夹路径的合法性
+
+    # tList = [str(i)+"\n" for i in tList]
+    with open(file_path,'w') as f:    #设置文件对象
+        for i in range(len(tList[0])):
+            aline = ''
+            for j in range(len(tList)):
+                aline = aline + ' ' + str(tList[j][i])
+            aline += '\n'
+            f.writelines(aline)
+    print("txt ok!")
 
 
 if __name__ == '__main__':

@@ -106,4 +106,4 @@ if __name__=='__main__':
     
     response = requests.post(url, data=post_data, headers=headers)
     print(response)
-    open("a.txt","wb").write(response.content)
+    open("./example/a.txt","wb").write(response.content)

@@ -13,9 +13,28 @@ import cv2
 import matplotlib.pyplot as plt
 from utils.txtTool import *
 
-def get_img(getpath):
+'''
+根据路径返回img
+get_img(getpath, gray=False, scale_percent=100)
+getpath:图片路径
+gray:是否显示为灰度图;default=False
+scale_percent:放缩比例;default=100
+'''
+def get_img(getpath, gray=False, scale_percent=100):
     img = cv2.imread(getpath)
+
+    if gray:img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)		# 转换为灰度图  解决cv读取灰度图成为三通道的问题
+    
+    if scale_percent != 100:
+        # percent of original size
+        width = int(img.shape[1] * scale_percent / 100)
+        height = int(img.shape[0] * scale_percent / 100)
+        dim = (width, height)
+        # resize image
+        img = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+
     return img
+
 
 def save_img(savepath, img):
     cv2.imwrite(savepath, img)
