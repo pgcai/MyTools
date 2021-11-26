@@ -12,16 +12,25 @@ import datetime
 
 # 返回 年月日 时分秒 毫秒
 def getDateYMDHMSU():
+    '''
+    年月日 时分秒 毫秒
+    '''
     now = datetime.datetime.now()
     return now.strftime('%Y%m%d_%H%M%S_%U')
 
 # 返回年月日
 def getDateYMD():
+    '''
+    年月日
+    '''
     now = datetime.datetime.now()
     return now.strftime('%Y%m%d')
 
 # 返回 年月日 时分秒
 def getDateYMDHMS():
+    '''
+    年月日
+    '''
     now = datetime.datetime.now()
     return now.strftime('%Y%m%d_%H%M%S')
 

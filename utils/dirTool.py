@@ -20,6 +20,10 @@ from dateTool import *
 (文件夹路径, 后缀名)
 '''
 def get_file(file_path, file_end=('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')):
+    '''
+    获取指定文件夹下指定后缀文件,不包含子文件夹
+    (文件夹路径, 后缀名)
+    '''
     filelist = []
     for parent, dirnames, filenames in os.walk(file_path):
         for filename in filenames:
@@ -32,6 +36,10 @@ def get_file(file_path, file_end=('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm
 (文件夹路径, 后缀名)
 '''
 def get_numfile(file_path, file_end=('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')):
+    '''
+    获取指定文件夹下指定后缀文件,不包含子文件夹     数字文件排序
+    (文件夹路径, 后缀名)
+    '''
     filelist = []
     for parent, dirnames, filenames in os.walk(file_path):
         filenames.sort(key=lambda x:int(x[:-4]))  # 按文件名排序 
