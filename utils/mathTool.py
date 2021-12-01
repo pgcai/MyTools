@@ -3,13 +3,32 @@
 author:pgcai
 
 function:
-1. sigmoid
-2. tanh
-3. relu
-4. prelu
-5. 求二维数组均值
-6. 求二维数组方差
-7. 二维数组标准化
+1. sigmoid(x)   sigmoid
+2. tanh(x)      tanh
+3. relu(x)      relu
+4. prelu(x, a=0.25)     prelu
+5. mean(nlist)  求数组均值
+6. var(nlist)   求数组方差
+7. std(nlist)   求数组标准差
+7. normalization(nlist)     归一化
+8. standardization(nlist)   标准化
+9. sta_mean_std(nlist, mean, std)   指定 均值 标准差 标准化
+10. euclidean_distance(a, b)        计算两向量的欧氏距离
+11. vectorial_resultant(a, b)       计算ab两向量合向量
+12. vector_angle(a, b)  计算点a指向点b的矢量 且各维度平方和为1
+13. linear_equation_in_2unknowns(a, b, c)   解二元一次方程
+14. arctan(theta)   输入正切值，返回角度值
+15. arcsin(theta)   输入正弦值，返回角度值
+16. arccos(theta)   输入余弦值，返回角度值
+17. arc_sin_cos(sin_theta, cos_theta)   同时输入sin 与 cos 计算角度值
+18. theta_angle(sin_theta, cos_theta, angle)    输入正弦余弦值，返回旋转angle角度后的正弦余弦值
+19. vector_3d_angle(v1, v2)     求两个3-dim向量的夹角
+20. 
+21. 
+22. 
+23. 
+24. 
+
 '''
 import math
 import numpy as np
@@ -54,7 +73,7 @@ def normalization(nlist):
 def standardization(nlist):
     return (nlist - mean(nlist)) / std(nlist)
 
-# 指定均值标准差标准化
+# 指定 均值 标准差 标准化
 def sta_mean_std(nlist, mean, std):
     return (nlist - mean) / std
 
@@ -136,7 +155,7 @@ def theta_angle(sin_theta, cos_theta, angle):
 
 def vector_3d_angle(v1, v2):
     '''
-    求两个3d向量的夹角
+    求两个3-dim向量的夹角
     '''
     v1 = np.array(v1)
     v2 = np.array(v2)

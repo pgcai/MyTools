@@ -2,10 +2,14 @@
 img tools
 包含图片处理常见工具.
 function:
-1. 根据路径返回img
-2. 根据路径保存图片
-3. 画折线图
-4. 切割图片
+1. get_img(getpath, gray=False, scale_percent=100) 根据路径返回img/灰度选择/缩放
+2. save_img(savepath, img)      保存图片
+3. plot_line_chart(y1, y2, y3)  画折线图 暂不完善 
+4. cut_pic(img,pattern=0, up = 0, down = 0, left = 0, right = 0)    切割图片/比例切割/像素切割
+5. plot_3d_line(x, z, y, over, x_max, y_max, z_max)     三维空间画线
+6. plot_3d_dot(location, over, x_max, y_max, z_max)     三维空间中画点
+
+
 '''
 import sys
 sys.path.append(r'./')      # 为了能找到自写函数
@@ -14,14 +18,13 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-'''
-根据路径返回img
-get_img(getpath, gray=False, scale_percent=100)
-getpath:图片路径
-gray:是否显示为灰度图;default=False
-scale_percent:放缩比例;default=100
-'''
 def get_img(getpath, gray=False, scale_percent=100):
+    '''
+    根据路径返回img\n
+    getpath:图片路径\n
+    gray:是否显示为灰度图;default=False\n
+    scale_percent:放缩比例;default=100
+    '''
     img = cv2.imread(getpath)
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
@@ -38,13 +41,17 @@ def get_img(getpath, gray=False, scale_percent=100):
 
     return img
 
-# 保存图片
 def save_img(savepath, img):
+    '''
+    保存图片
+    '''
     cv2.imwrite(savepath, img)
 
 
-# 画折线图
 def plot_line_chart(y1, y2, y3):
+    '''
+    画折线图 暂不完善 
+    '''
 
     plt.figure(figsize=(20,2))
     plt.title('太阳风速度预测')  # 折线图标题
@@ -59,9 +66,10 @@ def plot_line_chart(y1, y2, y3):
     # plt.legend(['True', 'P1', 'P2'])  # 设置折线名称
     plt.show()  # 显示折线图
 
-# 切割图片
+
 def cut_pic(img,pattern=0, up = 0, down = 0, left = 0, right = 0):
     '''
+    切割图片\n
     (img, 切割模式(0:比例,1:像素),图片上部分, 图片下, 左, 右)\n
     eg.\n
     >>>(img, 1, 50, 50, 50, 50)\n
@@ -104,6 +112,7 @@ def plot_3d_line(x, z, y, over, x_max, y_max, z_max):
         plt.clf()
     else:
         plt.pause(1000)
+
 
 def plot_3d_dot(location, over, x_max, y_max, z_max):
     from matplotlib.font_manager import FontProperties

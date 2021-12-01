@@ -5,9 +5,10 @@
 author：pgcai
 
 function:
-1. 将视频分帧到指定文件夹
-2. 将指定文件夹图片合成为视频
+1. def video2img(videoPath, savePath, timeF = 1, file_end='.jpg')   将视频分帧到指定文件夹
+2. img2video(savePath, videoPath, fps = 30, file_end=('.jpg'))  将指定文件夹图片合成为视频
 3. 拼接两个视频
+4. 
 
 '''
 import cv2

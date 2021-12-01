@@ -2,9 +2,9 @@
 excel读写及特殊操作工具箱
 
 function:
-1. 读取csv文件返回列表
-2. 读取excel文件返回列表
-3. 将列表写入到excel
+1. read_csv(file_path)  读取csv文件返回列表  
+2. read_exl(file_path)  读取excel文件返回列表
+3. write2exl(names, wlist, file_path)   将列表写入到excel
 '''
 import csv
 import pandas as pd
@@ -39,7 +39,7 @@ def write2exl(names, wlist, file_path):
     dic = {}
     for i in range(len(names)):
         dic[names[i]] = wlist[i].tolist()
-    print(dic)
+    # print(dic)
     df = pd.DataFrame(dic)
     df.to_excel(file_path)
 
@@ -56,3 +56,5 @@ if __name__=='__main__':
 
     names = ['xx', '222', 'dfd']
     write2exl(names, [[1,2,3],[4,5,6]], fpath4)
+
+    print(read_exl('./example/20211201.xlsx'))
