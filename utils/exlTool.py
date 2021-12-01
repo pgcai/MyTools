@@ -8,6 +8,7 @@ function:
 '''
 import csv
 import pandas as pd
+import numpy as np
 
 # 读取csv文件返回列表
 def read_csv(file_path):
@@ -26,14 +27,21 @@ def read_exl(file_path):
 
     return data.values
 
-def write2exl(file_path, wlist=[]):
+def write2exl(names, wlist, file_path):
     '''
     将列表写入到excel
+    一条一条数据
     '''
-    dic = {'xxx':[1,2,3],
-    'yyy':[4,5,6]}
+    wlist = np.array(wlist).transpose(1, 0)
+    if len(names) != len(wlist):
+        print('属性名与属性数不一致！')
+
+    dic = {}
+    for i in range(len(names)):
+        dic[names[i]] = wlist[i].tolist()
+    print(dic)
     df = pd.DataFrame(dic)
-    df.to_excel('file_path')
+    df.to_excel(file_path)
 
 
 if __name__=='__main__':
@@ -45,4 +53,6 @@ if __name__=='__main__':
     print(t)
     x = read_exl(fpath2)
     print(x)
-    write2exl(fpath4, [[1,2,3],[4,5,6]])
+
+    names = ['xx', '222', 'dfd']
+    write2exl(names, [[1,2,3],[4,5,6]], fpath4)

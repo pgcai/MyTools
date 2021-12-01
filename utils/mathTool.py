@@ -11,6 +11,7 @@ function:
 6. 求二维数组方差
 7. 二维数组标准化
 '''
+import math
 import numpy as np
 
 # sigmoid
@@ -95,6 +96,56 @@ def linear_equation_in_2unknowns(a, b, c):
     print(x1, x2)
     return [x1, x2]
 
+def arctan(theta):
+    '''
+    输入正切值，返回角度值
+    '''
+    return 180.*math.atan(theta)/math.pi     # 返回角度值
+
+def arcsin(theta):
+    '''
+    输入正弦值，返回角度值
+    '''
+    return 180.*math.asin(theta)/math.pi     # 返回角度值
+
+def arccos(theta):
+    '''
+    输入余弦值，返回角度值
+    '''
+    return 180.*math.acos(theta)/math.pi     # 返回角度值
+
+def arc_sin_cos(sin_theta, cos_theta):
+    '''
+    (y,x)
+    同时输入sin 与 cos 计算角度值
+    '''
+    if sin_theta > 0:
+        return arccos(cos_theta)
+    else:
+        return -arccos(cos_theta)
+
+def theta_angle(sin_theta, cos_theta, angle):
+    '''
+    输入正弦余弦值，返回旋转angle角度后的正弦余弦值
+    '''
+    _angle = arc_sin_cos(sin_theta, cos_theta)
+    angle_now = _angle + angle
+    sin_theta2 = math.sin(math.pi*angle_now/180)
+    cos_theta2 = math.cos(math.pi*angle_now/180)
+    return sin_theta2, cos_theta2
+
+def vector_3d_angle(v1, v2):
+    '''
+    求两个3d向量的夹角
+    '''
+    v1 = np.array(v1)
+    v2 = np.array(v2)
+    # print('np.sum(v1*v2) = ', np.sum(v1*v2))
+    # print('np.sqrt(np.sum(v1*v1)) = ', np.sqrt(np.sum(v1*v1)))
+    # print('np.sqrt(np.sum(v2*v2)) = ', np.sqrt(np.sum(v2*v2)))
+    cos_theta = np.sum(v1*v2)/(np.sqrt(np.sum(v1*v1))*np.sqrt(np.sum(v2*v2)))
+    print(cos_theta)
+    return arccos(cos_theta)
 
 if __name__=='__main__':
     # print(str(relu(-1)))
@@ -113,13 +164,39 @@ if __name__=='__main__':
     # print(standardization(a))
     # print(standardization(b))
 
-    x = [1,2,3,1,2,3,1,2,3,1,2,3]
-    y = [10,23,35,11,24,23,41,12,34,1237,72,53]
-    print(euclidean_distance(x,y))
+    # x = [1,2,3,1,2,3,1,2,3,1,2,3]
+    # y = [10,23,35,11,24,23,41,12,34,1237,72,53]
+    # print(euclidean_distance(x,y))
 
-    print(vectorial_resultant(x, y))
+    # print(vectorial_resultant(x, y))
 
-    linear_equation_in_2unknowns(4.9, 1000, -999)
+    # linear_equation_in_2unknowns(4.9, 1000, -999)
+
+    tan_theta = math.sqrt(3.)/3.
+    sin_theta = 0.5
+    cos_theta = math.sqrt(3.)/2.
+    print(arctan(tan_theta))
+    print(arcsin(-sin_theta))
+    print(arccos(cos_theta))
+    print(arccos(-cos_theta))
+
+    print(arc_sin_cos(sin_theta, cos_theta))
+    print(arc_sin_cos(sin_theta, -cos_theta))
+    print(arc_sin_cos(-sin_theta, -cos_theta))
+    print(arc_sin_cos(-sin_theta, cos_theta))
+
+    theta2 = 100
+    sin_theta2 = math.sin(math.pi*theta2/180)
+    cos_theta2 = math.cos(math.pi*theta2/180)
+
+    print(arc_sin_cos(sin_theta2, cos_theta2))
+
+    sin_theta3, cos_theta3 = theta_angle(sin_theta2, cos_theta2, 30)
+
+    print(arc_sin_cos(sin_theta3, cos_theta3))
+
+    print(vector_3d_angle([1,1,0], [1,-1,0]))
+    
 
 
 
