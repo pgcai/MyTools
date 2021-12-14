@@ -121,6 +121,15 @@ if __name__ == '__main__':
     # 根据当前时间(年月日时分秒)新建文件夹
     newPath = new_folder("./example")
 
+    rename_path = "E:/DataSet/fall/train2/ok"
+    dir_list = get_file(rename_path, file_end=('.jpg'))
+    for i in dir_list:
+        os.rename(i, i[:-4]+'_2'+ '.jpg')
+
+    dir_list = get_file(rename_path, file_end=('.txt'))
+    for i in dir_list:
+        os.rename(i, i[:-4]+'_2'+ '.txt')
+
 
 
 

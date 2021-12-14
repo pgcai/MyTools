@@ -11,7 +11,6 @@ function:
 import sys
 sys.path.append(r'./')      # 为了能找到自写函数
 
-from utils.txtTool import txt_read_2dim_num
 from utils.dirTool import *
 
 import numpy as np
@@ -94,6 +93,7 @@ def get_all_npy(npypath = []):
 
 
 if __name__=='__main__':
+    from utils.txtTool import txt_read_2dim_num
     print("Welcome to MyTools!")
     txtPath3 = "./example/data/2011.txt"
     a = txt_read_2dim_num(txtPath3)

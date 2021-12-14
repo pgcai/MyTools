@@ -13,7 +13,7 @@
 
 ### API参考手册
 
-#### dirTool🗂️
+#### 🗂️dirTool
 
 ```python
 1. get_file(file_path, file_end=('.png', '.jpg', '.jpeg'))      获取指定文件夹下指定后缀文件/不包含子文件夹
@@ -25,7 +25,7 @@
 
 
 
-#### txtTool📄
+#### 📄txtTool
 
 ```python
 1. check_dir(file_path)     检查文件地址的合法性,不存在文件夹则新建
@@ -44,7 +44,7 @@
 
 
 
-#### dateTool⏰
+#### ⌚dateTool
 
 ```python
 1. getDateYMDHMSU()     返回年月日|时分秒|毫秒
@@ -54,7 +54,7 @@
 
 
 
-#### exlTool📊
+#### 📊exlTool
 
 ```python
 1. read_csv(file_path)  读取csv文件返回列表  
@@ -64,7 +64,7 @@
 
 
 
-#### listTool🏁
+#### 🏁listTool
 
 ```python
 1. get_iwant_col_y(alist=[["!!!原列表为空"]], colname=[0])  返回你想要的列/一列一个列表
@@ -75,7 +75,7 @@
 
 
 
-#### videoTool📽️
+#### 📽️videoTool
 
 ```python
 1. video2img(videoPath, savePath, timeF = 1, file_end='.jpg')   将视频分帧到指定文件夹
@@ -84,7 +84,7 @@
 
 
 
-#### mathTool📐
+#### 📐mathTool
 
 ```python
 1. sigmoid(x)   sigmoid
@@ -111,7 +111,7 @@
 
 
 
-#### imgTool🖼️
+#### 🖼️imgTool
 
 ```python
 1. get_img(getpath, gray=False, scale_percent=100) 根据路径返回img/灰度选择/缩放
@@ -124,7 +124,7 @@
 
 
 
-#### spiderTool🕸️
+#### 🕸️spiderTool
 
 ```python
 1. get_headers(url, use='pc')	随机生成设备头
