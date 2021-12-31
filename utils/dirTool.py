@@ -1,12 +1,14 @@
 '''
 获取文件夹下所有图片的路径
 author:pgcai
-function：
+function:
 1. get_file(file_path, file_end=('.png', '.jpg', '.jpeg'))      获取指定文件夹下指定后缀文件/不包含子文件夹
 2. get_numfile(file_path, file_end=('.png', '.jpg', '.jpeg'))   获取指定文件夹下指定后缀文件/不包含子文件夹//文件名需要为number/排序
 3. get_file_sub(file_path, filelist=[], file_end=('.png', '.jpg'))      获取指定文件夹下指定后缀文件/包含子目录
 4. get_numfile_sub(file_path, filelist=[], file_end=('.png', '.jpg'))   获取指定文件夹下指定后缀文件/包含子目录/文件名需要为number/排序
 5. new_folder(dirpath)  根据当前时间新建文件夹
+6. change_suffix(dirpath, file_end=['.png','.jpg'], end_new='')   改变文件夹下指定后缀文件的后缀更改为自定义后缀
+7. change_name(dirpath, file_end=['.png','.jpg'], name_add='')    文件名后增加字符串（批量修改文件名）
 '''
 import sys
 sys.path.append(r'./utils')      # 为了能找到自写函数
@@ -101,9 +103,33 @@ def new_folder(dirpath):
         print("make dir success!")
         return(makePath)
     else:
-        print("folder already exists！")
+        print("folder already exists!")
         return(makePath)
 
+def change_suffix(dirpath, file_end=['.png','.jpg'], end_new=''):
+    '''
+    改变文件夹下指定后缀文件的后缀更改为自定义后缀
+    '''
+    for i in file_end:
+        print('i = ',i)
+        # break
+        print(len(i))
+        dir_list = get_file(rename_path, i)
+        for j in dir_list:
+            os.rename(j, j[:-len(i)] + end_new)
+
+def change_name(dirpath, file_end=['.png','.jpg'], name_add=''):
+    '''
+    文件名后增加字符串（批量修改文件名）
+    '''
+    for i in file_end:
+        print('i = ',i)
+        # break
+        print(len(i))
+        dir_list = get_file(rename_path, i)
+        for j in dir_list:
+            os.rename(j, j[:-len(i)] + name_add + j[-len(i):])
+            
 
 
 if __name__ == '__main__':
@@ -119,16 +145,10 @@ if __name__ == '__main__':
     print(get_file("./img",('png','jpg')))
 
     # 根据当前时间(年月日时分秒)新建文件夹
-    newPath = new_folder("./example")
+    # newPath = new_folder("./example")
 
-    rename_path = "E:/DataSet/fall/train2/ok"
-    dir_list = get_file(rename_path, file_end=('.jpg'))
-    for i in dir_list:
-        os.rename(i, i[:-4]+'_2'+ '.jpg')
-
-    dir_list = get_file(rename_path, file_end=('.txt'))
-    for i in dir_list:
-        os.rename(i, i[:-4]+'_2'+ '.txt')
+    rename_path = "E:/DataSet/fire_smoke/FireDateset/fire_dataset/fire_images"
+    change_suffix(rename_path,['.png'], '.jpg')
 
 
 

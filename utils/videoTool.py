@@ -74,4 +74,5 @@ if __name__=='__main__':
     # video_path = "D:\hy\data\smoke_over\smoke01"
     # video2img("./example/data/test.mp4","./example/data/testout")
     # img2video("./example/data/testout","./example/data/",file_end='.jpg')
-    img2video("D:\hy\data\smoke_over\smoke01","D:\hy\data\smoke01", fps=5, file_end='.jpg')
+    # img2video("D:\hy\data\smoke_over\smoke01","D:\hy\data\smoke01", fps=5, file_end='.jpg')
+    img2video("D:\DataSet\smoke_20211221","D:\DataSet\smoke_20211221", fps=5, file_end='.jpg')
