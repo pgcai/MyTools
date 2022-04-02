@@ -5,6 +5,7 @@ function:
 1. read_csv(file_path)  读取csv文件返回列表  
 2. read_exl(file_path)  读取excel文件返回列表
 3. write2exl(names, wlist, file_path)   将列表写入到excel
+4. excel2dict(filepath) 将excel文件装换为字典,键为列名
 '''
 import csv
 import pandas as pd
@@ -43,6 +44,21 @@ def write2exl(names, wlist, file_path):
     df = pd.DataFrame(dic)
     df.to_excel(file_path)
 
+def excel2dict(filepath):
+    '''
+    将excel文件装换为字典,键为列名
+    input: .xlsx
+    output:[{}, {}, {},...]
+    '''
+    data = pd.read_excel(filepath)
+    colnames = data.columns.values
+    output = []
+    for i in data.values:
+        one = {}
+        for j in range(len(i)):
+            one[colnames[j]] =  i[j]
+        output.append(one)
+    return output
 
 if __name__=='__main__':
     fpath = "./example/test.csv"

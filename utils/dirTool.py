@@ -147,8 +147,8 @@ if __name__ == '__main__':
     # 根据当前时间(年月日时分秒)新建文件夹
     # newPath = new_folder("./example")
 
-    rename_path = "E:/DataSet/fire_smoke/FireDateset/fire_dataset/fire_images"
-    change_suffix(rename_path,['.png'], '.jpg')
+    rename_path = "C:/Users/CC/Desktop/猴/data/originals/malignant"
+    change_suffix(rename_path,['.bmp'], '.jpg')
 
 
 

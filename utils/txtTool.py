@@ -13,6 +13,7 @@ function:
 8. txtAddWrite(file_path, str)          对txt文件!!增添写入字符串 str
 9. txtWriteArray(file_path, tList=[])   “新建”txt文件写入一个数组 "一个元素一行"
 10. txtAddWriteArray(file_path, tList=[])   “对原有”txt文件写入一个数组 "一个元素一行"
+11. txtAddWriteArray2(file_path, tList=[])   “对原有”txt文件写入一个数组 "多个元素一行"
 11. txtAddtxt(path1, path2)     两个txt文件 拼接
 12. txt_write_2d_array(file_path, tList=[[]])   “新建”txt文件写入一个2-dim列表/"多个属性一行"
 13. 
@@ -87,10 +88,10 @@ def txt_read_2dim(file_path, tList=[]):
     '''
     以列表形式返回txt中的内容(有字符串)/并去掉回车‘\n’/每一行有多个属性
     '''
-    f = open(file_path)               # 返回一个文件对象   
+    f = open(file_path,encoding='utf-8')               # 返回一个文件对象   
     line = f.readline()               # 调用文件的 readline()方法   
     while line:
-        tList.append(line[:-1].split())        # 不指定时 默认空格  有多个空格能跳过
+        tList.append(line.split())        # 不指定时 默认空格  有多个空格能跳过
         line = f.readline()   
     f.close()
     return tList
@@ -107,6 +108,30 @@ def txt_read_2dim_num(file_path, tList=[]):
         for i in alist:
             new.append(float(i))
         tList.append(new)        # 不指定时 默认空格  有多个空格能跳过
+        line = f.readline()   
+    f.close()
+    return tList
+
+def txt2dict(filepath, tList=[]):
+    '''
+    将txt文件读取为字典格式,键为第一行内容。\n
+    input: .txt\n
+    example:\n
+    product price\n
+    a 100\n
+    b 198\n
+    output:[{'product':'a', 'price':100},{'product':'b', 'price':198}]
+    '''
+    f = open(filepath,encoding='utf-8')               # 返回一个文件对象   
+    line = f.readline()               # 调用文件的 readline()方法 
+    colnames = line.split()
+    line = f.readline()
+    while line:
+        one = {}
+        theline = line.split()
+        for i in range(len(colnames)):
+            one[colnames[i]] = theline[i]
+        tList.append(one)        # 不指定时 默认空格  有多个空格能跳过
         line = f.readline()   
     f.close()
     return tList
@@ -150,6 +175,16 @@ def txtAddWriteArray(file_path, tList=[]):
     with open(file_path,'a') as f:    #设置文件对象
         f.writelines(tList)
 
+def txtAddWriteArray2(file_path, tList=[]):
+    '''
+    “对原有”txt文件写入一个数组 "多个元素一行"
+    '''
+    tList = [str(i) + " " for i in tList]
+    tList+="\n"
+    with open(file_path,'a') as f:    #设置文件对象
+        f.writelines(tList)
+    f.close()
+
 def txtAddtxt(path1, path2):
     '''
     两个txt文件 拼接
@@ -180,17 +215,19 @@ if __name__ == '__main__':
     txtPath = "./example/data/test.txt"
     txtPath2 = "./example/data/test2.txt"
     txtPath3 = "./example/data/2011.txt"
-    txtAddWrite(txtPath,"95633")
+    txtpath4 = "./example/data/alarm.txt"
+    # txtAddWrite(txtPath,"95633")
     # txtWriteArray(txtPath,[1212, 452345, 2135123])
-    txtWriteArray(txtPath,[1, 2, 3])
-    txtWriteArray(txtPath2,[4, 5, 6])
-    print(len(txtReadArray(txtPath2)))
-    print(txtRead(txtPath))
+    # txtWriteArray(txtPath,[1, 2, 3])
+    # txtWriteArray(txtPath2,[4, 5, 6])
+    # print(len(txtReadArray(txtPath2)))
+    # print(txtRead(txtPath))
     
-    txtAddtxt(txtPath, txtPath2)
+    # txtAddtxt(txtPath, txtPath2)
 
-    a = txt_read_2dim(txtPath3)
-    print(a)
+    # print(txt_read_2dim(txtPath3))
+    # print(txt_read_2dim(txtpath4))
+    print(txt2dict(txtpath4))
 
 
 
